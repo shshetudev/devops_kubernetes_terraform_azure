@@ -10,6 +10,5 @@ FROM openjdk:8-jdk-alpine
 EXPOSE 5000
 # Taking the last caching layer: stage1
 COPY --from=stage1 /home/app/target/hello-world-java.jar hello-world-java.jar
-# For Python and Nodejs, we use CMD but for Java, we use ENTRYPOINT
-# If we are using ENTRYPOINT, in that case, we have to run the bash command: `sh -c java -jar <JAR_FILE_NAME>`
+# Best approach is to use ENTRYPOINT, instead of CMD
 ENTRYPOINT ["sh", "-c", "java -jar /hello-world-java.jar"]

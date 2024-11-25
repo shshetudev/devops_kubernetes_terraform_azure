@@ -6,7 +6,10 @@ RUN npm install
 EXPOSE 5000
 
 COPY . /app
-CMD node index.js
+# Using CMD is very risky, because if we run with: `docker run -d -p 5001:5000 shshetudev/hello-world-nodejs:0.0.2.RELEASE ping google.com`, it will continuously ping google.com
+# So the best approach is to use ENTRYPOINT, and overrirding ENTRYPOINT is a bit complex as well.
+# CMD node index.js
+ENTRYPOINT ["node", "index.js"]
 
 #ENTRYPOINT ["node", "index.js"]
 #COPY package.json /app
